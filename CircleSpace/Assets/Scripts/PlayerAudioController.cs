@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioController : MonoBehaviour
+public class PlayerAudioController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] SoundEffects;
     private AudioSource audSource;

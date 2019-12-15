@@ -9,7 +9,7 @@ public class MusicController : MonoBehaviour
     [SerializeField] private int currentSong;
     [SerializeField] private int amountOfSongsIndex;
 
-    void Start()
+    private void Start()
     {
         DontDestroyOnLoad(gameObject);
 
@@ -18,7 +18,7 @@ public class MusicController : MonoBehaviour
         StartMusic();
     }
 
-    void StartMusic ()
+    private void StartMusic ()
     {
         Debug.Log("<color=blue>Starting music</color>");
         currentSong = 0;
@@ -28,17 +28,7 @@ public class MusicController : MonoBehaviour
         StartCoroutine(ChangeMusic());
     }
 
-    void ReplayMusic()
-    {
-        Debug.Log("<color=blue>Replaying music</color>");
-        currentSong = 0;
-        audSource.clip = music[currentSong];
-        audSource.Play();
-
-        StartCoroutine(ChangeMusic());
-    }
-
-    IEnumerator ChangeMusic ()
+    private IEnumerator ChangeMusic ()
     {
         Debug.Log("<color=blue> Next Song: </color>" + currentSong + " - " + audSource.clip.name);
         yield return new WaitForSeconds(music[currentSong].length);
@@ -48,7 +38,7 @@ public class MusicController : MonoBehaviour
         if (currentSong > amountOfSongsIndex)
         {
             Debug.Log("<color=blue>Ran out of songs to play</color>");
-            ReplayMusic();
+            StartMusic();
         }
 
         else
