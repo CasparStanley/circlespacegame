@@ -36,7 +36,7 @@ public class Inverted2DCollider : MonoBehaviour
         }
     }
 
-    public void ColliderOff()
+    public void ColliderOff ()
     {
         Debug.Log("<color=red>Collider was turned off!</color>");
         edgeCollider.enabled = false;

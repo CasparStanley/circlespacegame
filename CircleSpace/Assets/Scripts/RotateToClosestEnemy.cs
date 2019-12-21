@@ -29,26 +29,30 @@ public class RotateToClosestEnemy : MonoBehaviour
         // ROTATING ENEMY DETECTOR
         GameObject closestEnemyPos = GetClosestEnemyGameObject(); // Get the position of the closest circle
 
-        Vector3 enemyTargetDir = closestEnemyPos.transform.position - transform.position; // Find the direction towards this enemy
-        float angle = Mathf.Atan2(enemyTargetDir.y, enemyTargetDir.x) * Mathf.Rad2Deg; // Get that as an angle
-
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // Rotate towards the enemy
-        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z); // Don't rotate on X and Y
-
-        Debug.DrawRay(transform.position, enemyTargetDir, Color.red);
-
-        // MAKE THE ENEMY DETECTOR MORE TRANSPARENT THE FURTHER AWAY THE ENEMY IS. THIS ISN'T WORKING
-        float alphaValue = 1 / Vector3.Distance(transform.position, closestEnemyPos.transform.position);
-        if (alphaValue > 0.3f)
+        if (closestEnemyPos != null)
         {
-            sr.color = new Color(1, 1, 1, alphaValue);
-            print("Alpha Value: " + alphaValue);
-        }
+            Vector3 enemyTargetDir = closestEnemyPos.transform.position - transform.position; // Find the direction towards this enemy
 
-        else
-        {
-            alphaValue = 0;
-            sr.color = new Color(1, 1, 1, alphaValue);
+            float angle = Mathf.Atan2(enemyTargetDir.y, enemyTargetDir.x) * Mathf.Rad2Deg; // Get that as an angle
+
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // Rotate towards the enemy
+            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z); // Don't rotate on X and Y
+
+            Debug.DrawRay(transform.position, enemyTargetDir, Color.red);
+
+            // MAKE THE ENEMY DETECTOR MORE TRANSPARENT THE FURTHER AWAY THE ENEMY IS. THIS ISN'T WORKING
+            float alphaValue = 1 / Vector3.Distance(transform.position, closestEnemyPos.transform.position);
+            if (alphaValue > 0.3f)
+            {
+                sr.color = new Color(1, 1, 1, alphaValue);
+                print("Alpha Value: " + alphaValue);
+            }
+
+            else
+            {
+                alphaValue = 0;
+                sr.color = new Color(1, 1, 1, alphaValue);
+            }
         }
     }
 

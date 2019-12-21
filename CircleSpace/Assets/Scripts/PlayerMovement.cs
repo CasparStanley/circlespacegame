@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ScoreController scoreContScript;
     private Rigidbody2D rb;
     [HideInInspector] public bool playerCanMove;
+    private bool moving = false;
 
     [Space(10)]
 
@@ -57,16 +58,22 @@ public class PlayerMovement : MonoBehaviour
             Vector2 move = new Vector3(moveX, moveY);
 
             transform.position += Vector3.ClampMagnitude(move, moveSpeed) * Time.deltaTime;
+
+            if (moveX > 0 || moveY > 0) { moving = true; }
+            else { moving = false; }
         }
     }
 
     private void Update()
     {
-        Vector2 closestCirclePos = GetClosestCircleGameObject().transform.position; // Get the position of the closest circle
-        closestDistanceSqrCircle = Mathf.Infinity; // Reset Closest Distance so it can recalculate the target     
+        if (moving)
+        {
+            Vector2 closestCirclePos = GetClosestCircleGameObject().transform.position; // Get the position of the closest circle
+            closestDistanceSqrCircle = Mathf.Infinity; // Reset Closest Distance so it can recalculate the target
 
-        //DEBUG CLOSEST CIRCLE
-        Debug.DrawLine(transform.position, closestCirclePos, new Color(1,0,1));
+            // DEBUG CLOSEST CIRCLE
+            //Debug.DrawLine(transform.position, closestCirclePos, new Color(1, 0, 1));
+        }
 
         if (fadeForce)
         {
@@ -146,7 +153,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (closestCircle.GetComponent<Inverted2DCollider>().circleColliderOn == false)
+        {
             closestCircle.GetComponent<Inverted2DCollider>().ColliderOn();
+        }
+
         return closestCircle;
     }
     #endregion

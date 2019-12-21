@@ -103,6 +103,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -113,7 +114,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -754095599
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2b5e596778672e54c82dbaba472734dd, type: 3}
   m_Color: {r: 1, g: 0.19339621, b: 0.39097828, a: 1}
@@ -142,6 +143,7 @@ GameObject:
   - component: {fileID: 1519112613626633619}
   - component: {fileID: 2645092869933467510}
   - component: {fileID: 9006941478757706716}
+  - component: {fileID: 6567191301042560733}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -366,3 +368,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6567191301042560733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645092869933467469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979416e8fc70da546ab2fef29f88653c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailObj: {fileID: 3884192958960514099, guid: 3b895bcfde3b37449bb7fe848756aaea,
+    type: 3}
+  delay: 0.2
