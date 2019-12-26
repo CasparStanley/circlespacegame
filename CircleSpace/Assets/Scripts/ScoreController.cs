@@ -20,8 +20,6 @@ public class ScoreController : MonoBehaviour
 
     [SerializeField] private int[] bgUpdates;
     [SerializeField] private Color[] bgColors;
-    private Color lerpedColor;
-    private Color prevColor;
     [SerializeField] private Camera mainCam;
 
     // High Score Stuff
@@ -30,17 +28,10 @@ public class ScoreController : MonoBehaviour
     [SerializeField] private TMP_Text highScoreTextPrefab;
     [SerializeField] private GameObject highScoresParent;
     public static List<int> highScoresList = new List<int>();
-    //[SerializeField] private List<GameObject> highScoresObjects = new List<GameObject>(); 
-
-    private bool changeBg;
 
     private void Start()
     {
         LoadHighScores();
-
-        changeBg = false;
-        lerpedColor = mainCam.backgroundColor;
-        prevColor = lerpedColor;
     }
 
     // LOAD HS FROM FILE
@@ -89,6 +80,7 @@ public class ScoreController : MonoBehaviour
     {
         if (currentScore > highScore)
         {
+            // UPDATE HIGH SCORE TEXT AND FILE
             highScore = currentScore;
             highScoresList.Sort();
             highScoresList.Add(highScore); // Add the new high score int to the list of high scores (INTS - THIS IS WHAT IS SAVED LOCALLY)
@@ -97,11 +89,10 @@ public class ScoreController : MonoBehaviour
             TMP_Text newHighScoreText = Instantiate(highScoreTextPrefab, transform.position, transform.rotation); // Instantiate the new high score as a text
             newHighScoreText.transform.SetParent(highScoresParent.transform); // Set the new high score text as a child of the High Scores so it will position itself correctly
             newHighScoreText.text = highScore.ToString(); // Set the new text to the most recent high score
-            newHighScoreText.gameObject.transform.SetSiblingIndex(0);
-
-            //highScoresObjects.Add(newHighScoreText.gameObject); // Add the new high score text object to the list of high scores (GAME OBJECTS)
+            newHighScoreText.gameObject.transform.SetSiblingIndex(0); // Set the text object as the first child to have it at the top
 
             SaveHighScores();
+            ShowNewHighScorePanel(highScore);
         }
     }
 
@@ -118,5 +109,10 @@ public class ScoreController : MonoBehaviour
                 Debug.Log("bgUpdateCounter: " + bgUpdateCounter + " and value: " + value);
             }
         }
+    }
+
+    private void ShowNewHighScorePanel (int hs)
+    {
+
     }
 }
