@@ -64,26 +64,6 @@ public class ScoreController : MonoBehaviour
                 highScore = Mathf.Max(highScoresList.ToArray());
             }
         }
-
-        /*
-        if (highScoresList.Count > maxHighscoresInList) // We want to only show 15 high scores
-        {
-            int smallestHS = highScoresList.Min(); // Find the smallest value in the List
-            highScoresList.Remove(highScoresList.IndexOf(smallestHS)); // Delete it!
-
-
-
-            // DEBUGGING
-            string hsString;
-            foreach (int hs in highScoresList)
-            {
-                hsString = hs.ToString();
-                Debug.Log(hsString + '\n');
-            }
-
-            Debug.Log("Bottom HS Deleted: " + smallestHS);
-        }
-        */
     }
 
     // SAVE HS TO FILE
