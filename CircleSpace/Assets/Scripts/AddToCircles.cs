@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddToPlayerCircles : MonoBehaviour
+public class AddToCircles : MonoBehaviour
 {
     PlayerMovement playerMoveScript;
     private ScoreController scoreContScript;

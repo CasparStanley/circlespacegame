@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 2645092869933467510}
   - component: {fileID: 9006941478757706716}
   - component: {fileID: 6567191301042560733}
+  - component: {fileID: -2987430697365341463}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -201,10 +202,6 @@ MonoBehaviour:
   enemyColorGreen: {r: 0, g: 1, b: 0.073209524, a: 1}
   enemyColorYellow: {r: 1, g: 0.7812412, b: 0, a: 1}
   enemyColorRed: {r: 1, g: 0, b: 0.22645569, a: 1}
-  bgCirclePrefab: {fileID: 5364909295066632875, guid: cc158cf334768da43958d75d5f53ceb3,
-    type: 3}
-  plus10PointsPrefab: {fileID: 9015085895895352132, guid: 94c08f14a86150c4181865b34754db22,
-    type: 3}
 --- !u!114 &8620901493608849989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +372,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2645092869933467469}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 979416e8fc70da546ab2fef29f88653c, type: 3}
   m_Name: 
@@ -383,3 +380,23 @@ MonoBehaviour:
   trailObj: {fileID: 3884192958960514099, guid: 3b895bcfde3b37449bb7fe848756aaea,
     type: 3}
   delay: 0.2
+--- !u!114 &-2987430697365341463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645092869933467469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1901b06277ec84c996f5d1ca4bf768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameBoardCirclePrefab: {fileID: 5364909295066632875, guid: cc158cf334768da43958d75d5f53ceb3,
+    type: 3}
+  GameBoardCirclePrefabBig: {fileID: 5364909295066632875, guid: 7ee33c61ad9561c40a4e4747332ebe3c,
+    type: 3}
+  plusPointsPrefab10: {fileID: 9015085895895352132, guid: 94c08f14a86150c4181865b34754db22,
+    type: 3}
+  plusPointsPrefab20: {fileID: 8414860623006131160, guid: 880deedc1f5e1fa4ba846de2e64a0b5d,
+    type: 3}

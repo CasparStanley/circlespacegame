@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateController : MonoBehaviour
+public class EnemyStateCont : MonoBehaviour
 {
     private SpriteRenderer enemySprite;
     MenuController menuContScript;
@@ -10,6 +10,7 @@ public class EnemyStateController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerMovement playerMovScript;
     [SerializeField] private RotateToClosestEnemy rotateToEnemyScript;
+    private CircleSpawn circleSpawnScript;
 
     [SerializeField] private int enemyState = 1;
     [SerializeField] private float blinkTime;
@@ -23,6 +24,7 @@ public class EnemyStateController : MonoBehaviour
         playerMovScript = player.GetComponent<PlayerMovement>();
         rotateToEnemyScript = player.GetComponentInChildren<RotateToClosestEnemy>();
         menuContScript = GameObject.Find("_Game Controller").GetComponent<MenuController>();
+        circleSpawnScript = GetComponent<CircleSpawn>();
 
         enemySprite = GetComponentInChildren<SpriteRenderer>();
         enemySprite.color = enemyColorGreen;
@@ -72,6 +74,7 @@ public class EnemyStateController : MonoBehaviour
 
                 Debug.Log("<color=green> Enemy Should Die </color>");
 
+                circleSpawnScript.SpawnCircle();
                 rotateToEnemyScript.enemies.Remove(gameObject);
 
                 Destroy(gameObject, 0.01f);

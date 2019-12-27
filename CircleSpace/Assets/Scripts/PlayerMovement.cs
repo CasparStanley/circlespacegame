@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ScoreController scoreContScript;
     private Rigidbody2D rb;
     [HideInInspector] public bool playerCanMove;
-    private bool moving = false;
 
     [Space(10)]
 
@@ -27,19 +26,13 @@ public class PlayerMovement : MonoBehaviour
     [Space(10)]
 
     // FIND CLOSEST CIRCLE CENTER
-    public List<GameObject> circles = new List<GameObject>();    
+    public List<GameObject> circles = new List<GameObject>();
     Vector2 bestTargetCircle;
     GameObject closestCircle;
     float closestDistanceSqrCircle = Mathf.Infinity;
 
-    // LINE DEBUGGING:
-    //[SerializeField] private Color lineColor = new Color(0, 1, 0);
-    //[SerializeField] private GameObject myLine;
-    //private LineRenderer lr;
-
     private void Start()
     {
-        //lr = myLine.GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
         joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
@@ -58,23 +51,14 @@ public class PlayerMovement : MonoBehaviour
             Vector2 move = new Vector3(moveX, moveY);
 
             transform.position += Vector3.ClampMagnitude(move, moveSpeed) * Time.deltaTime;
-
-            if (moveX > 0 || moveY > 0) { moving = true; }
-            else { moving = false; }
         }
     }
 
     private void Update()
     {
-        if (moving)
-        {
-            Vector2 closestCirclePos = GetClosestCircleGameObject().transform.position; // Get the position of the closest circle
-            closestDistanceSqrCircle = Mathf.Infinity; // Reset Closest Distance so it can recalculate the target
-
-            // DEBUG CLOSEST CIRCLE
-            //Debug.DrawLine(transform.position, closestCirclePos, new Color(1, 0, 1));
-        }
-
+        Vector2 closestCirclePos = GetClosestCircleGameObject().transform.position; // Get the position of the closest circle
+        closestDistanceSqrCircle = Mathf.Infinity; // Reset Closest Distance so it can recalculate the target
+       
         if (fadeForce)
         {
             playerCanMove = false;
@@ -115,24 +99,6 @@ public class PlayerMovement : MonoBehaviour
         fadeForce = true;
     }
 
-    #region DEBUGGING CLOSEST CIRCLE
-    // DEBUGGING ONLY
-    /*
-    public void DrawLine(Vector3 start, Vector2 end, Color color)
-    {
-        myLine.transform.position = start;
-
-        lr.startColor = color;
-        lr.endColor = color;
-        lr.startWidth = 0.02f;
-        lr.endWidth = 0.01f;
-
-        lr.SetPosition(0, start);
-        lr.SetPosition(1, end);
-    }
-    */
-    #endregion
-
     #region GET CLOSEST CIRCLE
     // FINDING THE CLOSEST CIRCLE CENTER BY GAMEOBJECT
     GameObject GetClosestCircleGameObject ()
@@ -141,8 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
         foreach (GameObject potentialCircle in circles) // Go through all potential circle centers
         {
-            float dist = Vector3.Distance(potentialCircle.transform.position, currentPos); // Set dist to be the distance between a potential target
-                                                                                           // and the player
+            float dist = Vector3.Distance(potentialCircle.transform.position, currentPos); // Set dist to be the distance between a potential target and the player
             potentialCircle.GetComponent<Inverted2DCollider>().ColliderOff();
 
             if (dist < closestDistanceSqrCircle) // If the distance to a potential target is lower than the last target...
@@ -156,6 +121,9 @@ public class PlayerMovement : MonoBehaviour
         {
             closestCircle.GetComponent<Inverted2DCollider>().ColliderOn();
         }
+
+        // DEBUG CLOSEST CIRCLE
+        Debug.DrawLine(transform.position, closestCircle.transform.position, new Color(1, 0, 1));
 
         return closestCircle;
     }

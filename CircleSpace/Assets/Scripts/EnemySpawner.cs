@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    EnemySpawnerSpawner spawnerScript;
-    ScoreController scoreContScript;
-    SpriteRenderer sr;
+    private EnemySpawnerSpawner spawnerScript;
+    private ScoreController scoreContScript;
+    private CircleSpawn circleSpawnScript;
+    private SpriteRenderer sr;
 
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] GameObject plus20PointsPrefab;
+    [SerializeField] private GameObject enemyPrefab;
 
     private int enemySpawnWaitTime;
 
     [SerializeField] private int spawnerHealth = 4;
-    [SerializeField] private int pointsForDestroy = 2;
     [SerializeField] Sprite[] spawnerSprites;
     private int currentSprite;
 
@@ -25,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnerScript = GameObject.Find("_Game Controller").GetComponent<EnemySpawnerSpawner>();
         scoreContScript = GameObject.Find("_Game Controller").GetComponent<ScoreController>();
+        circleSpawnScript = GetComponent<CircleSpawn>();
         audSource = GetComponent<AudioSource>();
 
         enemySpawnWaitTime = Random.Range(8, 14);
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
             spawnerScript.spawnerLocations.Add(transform.position);
 
             // Audio
-            audSource.clip = damageSfxs[currentSprite]; // reuse of currentSprite 'cause it counts the same
+            audSource.clip = damageSfxs[currentSprite]; // reuse of currentSprite int number 'cause it counts the same as is needed for SFX
             audSource.Play();
 
             // Visual
@@ -53,10 +53,8 @@ public class EnemySpawner : MonoBehaviour
             sr.sprite = spawnerSprites[currentSprite];
 
             spawnerHealth = 0;
-            scoreContScript.ScoreUpdate(pointsForDestroy);
 
-            GameObject plus20 = Instantiate(plus20PointsPrefab, transform.position, transform.rotation);
-            plus20.transform.SetParent(transform);
+            circleSpawnScript.Spawn4Circles();
 
             Destroy(gameObject, 0.5f);
         }
@@ -64,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
         else // If it's still got health left
         {
             // Audio
-            audSource.clip = damageSfxs[currentSprite]; // reuse of currentSprite 'cause it counts the same
+            audSource.clip = damageSfxs[currentSprite]; // reuse of currentSprite int number 'cause it counts the same as is needed for SFX
             audSource.Play();
 
             // Visual
