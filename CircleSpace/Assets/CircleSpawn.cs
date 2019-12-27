@@ -23,7 +23,7 @@ public class CircleSpawn : MonoBehaviour
         newCircle.transform.SetParent(backgroundParent.transform);
 
         GameObject plus10 = Instantiate(plusPointsPrefab10, transform.position, transform.rotation);
-        plus10.transform.SetParent(transform);
+        Destroy(plus10, 1);
     }
 
     public void Spawn4Circles ()
@@ -35,6 +35,6 @@ public class CircleSpawn : MonoBehaviour
         }
 
         GameObject plus20 = Instantiate(plusPointsPrefab20, transform.position, transform.rotation);
-        plus20.transform.SetParent(transform);
+        Destroy(plus20, 1);
     }
 }
